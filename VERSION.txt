@@ -1,0 +1,4 @@
+Cockpit RNF v0.10
+Source distante : GitHub.
+Mise à jour automatique de la PWA activée.
+Aucune donnée personnelle n'est stockée dans ce dépôt public.
