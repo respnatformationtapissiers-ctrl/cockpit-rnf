@@ -1,4 +1,5 @@
-Cockpit RNF v0.10
-Source distante : GitHub.
-Mise à jour automatique de la PWA activée.
+Cockpit RNF v0.11
+Source distante : GitHub Pages.
+Répertoire en fiches contact avec appels et mails directs.
+Cache PWA renouvelé pour distinguer l’ancienne application locale.
 Aucune donnée personnelle n'est stockée dans ce dépôt public.
