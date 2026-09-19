@@ -1,5 +1,5 @@
-Cockpit RNF v0.11
+Cockpit RNF v0.12
 Source distante : GitHub Pages.
-Répertoire en fiches contact avec appels et mails directs.
-Cache PWA renouvelé pour distinguer l’ancienne application locale.
-Aucune donnée personnelle n'est stockée dans ce dépôt public.
+Module Tâches enrichi : statut, attente, suivi, dossier, contexte, échéance horaire et lien réunion.
+Import local depuis Athéna via presse-papiers, sans publier les tâches privées dans le dépôt.
+Aucune donnée personnelle n'est stockée en clair dans ce dépôt public.
