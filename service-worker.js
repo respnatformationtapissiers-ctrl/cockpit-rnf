@@ -1,4 +1,4 @@
-const CACHE='rnf-v010';
+const CACHE='rnf-v011';
 const ASSETS=['./','./index.html','./manifest.webmanifest','./icon.svg'];
 
 self.addEventListener('install', event => {
