@@ -1,0 +1,19 @@
+{
+  "name": "Cockpit RNF — Formation Tapissiers",
+  "short_name": "Cockpit RNF",
+  "description": "Poste de pilotage du Responsable National de Formation — Tapissiers",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0d1410",
+  "theme_color": "#17211b",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
