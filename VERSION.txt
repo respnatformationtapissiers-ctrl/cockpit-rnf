@@ -1,8 +1,7 @@
-Cockpit RNF v0.14
+Cockpit RNF v0.15
 Source distante : GitHub Pages.
-Module Suivi de budget relié à une source Google Sheets privée.
-La source maître native Google Sheets reste dans Drive ; l’onglet technique « Cockpit » expose uniquement les valeurs de synthèse nécessaires à l’interface.
-Le cockpit utilise une autorisation OAuth Google en lecture seule et ne stocke pas les données comptables détaillées dans le dépôt public.
+Client OAuth Google configuré pour la synchronisation privée du budget.
+Le cockpit lit la synthèse du Google Sheets maître via Google Identity Services avec le scope Sheets en lecture seule.
+Le Client ID OAuth public est intégré à l’application ; aucun client secret n’est stocké dans le dépôt.
+Le tableau maître reste privé dans Drive.
 Synchronisation : à l’ouverture de la vue budget, sur demande manuelle et toutes les 30 secondes tant que la vue est ouverte et que l’autorisation Google est active.
-Le Client ID OAuth Google reste à renseigner une seule fois dans les Réglages du cockpit ; il est conservé localement sur l’appareil.
-Aucune donnée personnelle ni donnée comptable détaillée n’est stockée en clair dans ce dépôt public.
