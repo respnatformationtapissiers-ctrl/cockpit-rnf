@@ -1,5 +1,8 @@
-Cockpit RNF v0.12
+Cockpit RNF v0.13
 Source distante : GitHub Pages.
-Module Tâches enrichi : statut, attente, suivi, dossier, contexte, échéance horaire et lien réunion.
-Import local depuis Athéna via presse-papiers, sans publier les tâches privées dans le dépôt.
-Aucune donnée personnelle n'est stockée en clair dans ce dépôt public.
+Ajout d'une tuile « Suivi de budget » sur le tableau de commande.
+Nouvelle vue BTM : synthèse globale avec jauge circulaire et 18 tuiles de stages PERF 1 / PERF 2 / PERF 3.
+Chaque stage peut afficher le coût matière, le coût formateur (salaire, hébergement, transport) et le coût total.
+Le tableau budgétaire détaillé reste hors du dépôt public et doit rester protégé dans Drive ; le cockpit n'affiche qu'une synthèse.
+La liaison de lecture avec la source budgétaire Drive reste à connecter.
+Aucune donnée personnelle ni donnée comptable détaillée n'est stockée en clair dans ce dépôt public.
