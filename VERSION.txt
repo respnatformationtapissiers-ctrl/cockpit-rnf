@@ -1,7 +1,9 @@
-Cockpit RNF v0.15
+Cockpit RNF v0.16
 Source distante : GitHub Pages.
+Ajout d’une tuile « Stock CFA » sur l’écran d’accueil du cockpit.
+La tuile ouvre la vue Stock CFA du tableau maître RNF, avec suivi des carcasses, QR, états, emplacements et photos.
 Client OAuth Google configuré pour la synchronisation privée du budget.
 Le cockpit lit la synthèse du Google Sheets maître via Google Identity Services avec le scope Sheets en lecture seule.
 Le Client ID OAuth public est intégré à l’application ; aucun client secret n’est stocké dans le dépôt.
 Le tableau maître reste privé dans Drive.
-Synchronisation : à l’ouverture de la vue budget, sur demande manuelle et toutes les 30 secondes tant que la vue est ouverte et que l’autorisation Google est active.
+Synchronisation budget : à l’ouverture de la vue budget, sur demande manuelle et toutes les 30 secondes tant que la vue est ouverte et que l’autorisation Google est active.
