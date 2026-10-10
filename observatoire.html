@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#17211b">
+<title>Observatoire métier · Cockpit RNF</title>
+<style>
+:root{color-scheme:dark;--bg:#0d1410;--panel:#17211b;--panel2:#1f2c24;--line:#38483d;--text:#eef4ef;--mute:#a9b7ad;--accent:#bccb7e;--warn:#e5b561}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(145deg,#0b100d,#101914);color:var(--text);font:15px system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.5}
+main{width:min(1120px,100%);margin:0 auto;padding:18px 15px 90px}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+header a,.secondary{border:1px solid var(--line);color:var(--text);text-decoration:none;border-radius:11px;padding:10px 12px;background:#121a15;cursor:pointer}
+.identity{display:flex;gap:12px;align-items:center}
+.logo{width:48px;height:48px;border-radius:13px;background:var(--accent);color:#152019;display:grid;place-items:center;font-weight:900}
+.small{font-size:13px;color:var(--mute)}
+h1{font-size:clamp(24px,4vw,38px);margin:0 0 5px}
+h2{font-size:20px;margin:0 0 7px}
+h3{font-size:16px;margin:0 0 5px}
+p{margin:7px 0 14px}.hero{padding:24px 0 18px;max-width:800px}
+.hero p{font-size:16px;color:var(--mute)}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:19px}
+button{font:inherit;cursor:pointer}
+.tab,.pill{background:#121a15;border:1px solid var(--line);border-radius:30px;padding:9px 14px;color:var(--mute)}
+.tab[aria-selected=true],.pill[aria-pressed=true]{background:var(--accent);color:#152019;border-color:var(--accent);font-weight:750}
+.panel{display:none}.panel.on{display:block}
+.box{background:var(--panel);border:1px solid var(--line);padding:19px;border-radius:17px;margin:12px 0}
+.overview{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.overview .box{margin:0}
+.emoji{font-size:24px}
+.filters{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:14px 0}
+input,select,textarea{font:inherit;color:var(--text);background:#0f1712;border:1px solid var(--line);border-radius:10px;padding:12px;width:100%}
+input[type=search]{max-width:420px}
+label{display:block;font-weight:650;margin:12px 0 5px}
+label em{font-size:12px;color:var(--mute);font-weight:400;font-style:normal}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.formgrid .wide{grid-column:1/-1}
+textarea{min-height:100px;resize:vertical}
+.primary{background:var(--accent);color:#152019;border:0;border-radius:10px;padding:12px 15px;font-weight:800}
+.primary:disabled{opacity:.45;cursor:not-allowed}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.notice{padding:12px 14px;background:#252217;border:1px solid #665632;border-radius:10px;color:#f1dfb5;font-size:13px;margin:14px 0}
+.empty{padding:32px 16px;border:1px dashed var(--line);border-radius:14px;color:var(--mute);text-align:center}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.entry{border:1px solid var(--line);border-radius:14px;padding:16px;background:#121a15;overflow-wrap:anywhere}
+.meta{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 8px}
+.chip{border:1px solid var(--line);border-radius:18px;padding:3px 8px;font-size:12px;color:var(--mute)}
+.entry p{color:var(--mute);margin-bottom:10px}
+.entry a{color:#d8e9ad}
+hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+.status{min-height:20px;color:var(--accent);font-size:13px;margin-top:8px}
+footer{margin-top:24px;color:var(--mute);font-size:13px}
+@media(max-width:700px){.overview,.cards,.formgrid{grid-template-columns:1fr}.box{padding:15px}.hero{padding-top:20px}}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="identity"><div class="logo">RNF</div><div><strong>Observatoire métier</strong><div class="small">Formation · Tapisserie · Décoration</div></div></div>
+  <a href="./index.html">← Retour au Cockpit</a>
+</header>
+<div class="hero">
+  <h1>Repérer. Comprendre. Transmettre.</h1>
+  <p>Un espace de veille professionnelle partagé, alimenté par les itinérants, les formateurs et le RNF. Les ressources sont sélectionnées avant leur diffusion.</p>
+</div>
+<div class="tabs" role="tablist" aria-label="Espaces de l’Observatoire">
+  <button class="tab" id="tab-library" role="tab" aria-controls="library" aria-selected="true" onclick="view('library')">Bibliothèque validée</button>
+  <button class="tab" id="tab-propose" role="tab" aria-controls="propose" aria-selected="false" onclick="view('propose')">Proposer une découverte</button>
+  <button class="tab" id="tab-review" role="tab" aria-controls="review" aria-selected="false" onclick="view('review')">Sélection RNF</button>
+</div>
+
+<section class="panel on" id="library" role="tabpanel" aria-labelledby="tab-library">
+  <div class="overview">
+    <div class="box"><div class="emoji">🎓</div><h3>Formation professionnelle</h3><div class="small">Pédagogie, diplômes, transmission et réglementation.</div></div>
+    <div class="box"><div class="emoji">🪑</div><h3>Métier de tapissier</h3><div class="small">Techniques, matériaux, restauration et métiers d’art.</div></div>
+    <div class="box"><div class="emoji">🎨</div><h3>Décoration</h3><div class="small">Textiles, architecture intérieure, design et patrimoine.</div></div>
+  </div>
+  <div class="box">
+    <h2>Ressources publiées</h2>
+    <p class="small">Articles, études, vidéos, conférences, podcasts, musées et visites : uniquement des contenus approuvés pour diffusion.</p>
+    <div class="filters">
+      <input type="search" id="search" aria-label="Rechercher dans les ressources" placeholder="Rechercher une technique, un auteur, un sujet…" oninput="renderLibrary()">
+      <select id="categoryFilter" aria-label="Filtrer par domaine" onchange="renderLibrary()">
+        <option value="">Tous les domaines</option><option>Formation professionnelle</option><option>Tapisserie</option><option>Décoration</option>
+      </select>
+      <select id="typeFilter" aria-label="Filtrer par support" onchange="renderLibrary()">
+        <option value="">Tous les formats</option><option>Article</option><option>Étude</option><option>Vidéo</option><option>Podcast</option><option>Conférence</option><option>Visite</option><option>Autre</option>
+      </select>
+    </div>
+    <div id="libraryCount" class="small" aria-live="polite"></div>
+    <div id="libraryCards" class="cards" style="margin-top:12px"></div>
+  </div>
+</section>
+
+<section class="panel" id="propose" role="tabpanel" aria-labelledby="tab-propose">
+  <div class="box">
+    <h2>Partager une découverte</h2>
+    <p>Un article, une innovation, un podcast, une conférence ou une exposition : explique en quelques mots pourquoi tu proposes cette ressource. Il n’y a pas de commentaires publics.</p>
+    <form id="proposalForm" onsubmit="prepareEmail(event)">
+      <div class="formgrid">
+        <div><label for="author">Ton nom ou nom de Compagnon</label><input id="author" required maxlength="100" autocomplete="name" placeholder="Nom du contributeur"></div>
+        <div><label for="role">Ton rôle</label><select id="role" required><option value="">Choisir…</option><option>Itinérant</option><option>Formateur</option><option>RNF</option><option>Autre compagnon</option></select></div>
+        <div><label for="category">Domaine</label><select id="category" required><option>Formation professionnelle</option><option>Tapisserie</option><option>Décoration</option></select></div>
+        <div><label for="type">Format</label><select id="type" required><option>Article</option><option>Étude</option><option>Vidéo</option><option>Podcast</option><option>Conférence</option><option>Visite</option><option>Autre</option></select></div>
+        <div class="wide"><label for="title">Titre de la ressource</label><input id="title" required maxlength="180" placeholder="Un titre précis"></div>
+        <div class="wide"><label for="source">Lien source <em>(https://…)</em></label><input id="source" required type="url" maxlength="1500" placeholder="https://…"></div>
+        <div class="wide"><label for="interest">Pourquoi est-ce intéressant ?</label><textarea id="interest" required maxlength="750" placeholder="Ce que tu as appris, l’intérêt pour le métier ou la formation…"></textarea></div>
+        <div class="wide"><label for="audience">À qui le recommander ?</label><select id="audience"><option>Tous publics</option><option>Formateurs</option><option>PERF 1</option><option>PERF 2</option><option>PERF 3</option><option>RNF</option></select></div>
+      </div>
+      <div class="notice">L’envoi ouvre ton application de messagerie avec la proposition préremplie. Tu dois ensuite appuyer sur « Envoyer ». La ressource ne sera pas publiée automatiquement.</div>
+      <div class="actions"><button class="primary" type="submit">✉️ Préparer l’envoi au RNF</button><button class="secondary" type="button" onclick="downloadProposal()">Sauvegarder la proposition</button></div>
+      <div class="status" id="proposalStatus" role="status"></div>
+    </form>
+  </div>
+</section>
+
+<section class="panel" id="review" role="tabpanel" aria-labelledby="tab-review">
+  <div class="box">
+    <h2>Table de sélection RNF</h2>
+    <p>Importer une proposition reçue, l’examiner, puis la retenir ou l’écarter. Chaque décision demeure locale à cet appareil jusqu’à l’export.</p>
+    <div class="notice"><strong>Limite actuelle :</strong> il n’y a pas encore de serveur d’authentification ni de synchronisation multi-utilisateur. Cet espace n’est pas une console d’administration sécurisée. Rien de ce qui est validé ici n’est publié en ligne avant mise à jour du fichier de diffusion.</div>
+    <label for="importText">Proposition reçue <em>(copier le bloc JSON du courriel, ou coller une fiche JSON)</em></label>
+    <textarea id="importText" placeholder='{"title":"…","url":"https://…","category":"Tapisserie","type":"Article","interest":"…"}'></textarea>
+    <div class="actions"><button class="secondary" onclick="importProposal()">Importer dans les propositions à examiner</button><button class="secondary" onclick="exportValidated()">Exporter la sélection validée</button></div>
+    <div class="status" id="reviewStatus" role="status"></div>
+    <hr>
+    <h3>Propositions à examiner</h3>
+    <div id="reviewList" class="cards"></div>
+    <p class="small">L’export contient uniquement les fiches validées, sans identité du contributeur. Une publication collective nécessite ensuite d’intégrer cet export au référentiel de diffusion du Cockpit.</p>
+  </div>
+</section>
+<footer>AOCDTF · Formation Tapissier · Observatoire métier — ressources partagées après sélection RNF.</footer>
+</main>
+<script>
+'use strict';
+const PUBLIC_FILE='./observatoire-publications.json';
+const LOCAL_QUEUE_KEY='rnf-observatoire-selection-v1';
+const MAIL='resp.nat.formationtapissiers@gmail.com';
+let publications=[];
+let localQueue=[];
+try { let saved=JSON.parse(localStorage.getItem(LOCAL_QUEUE_KEY)||'[]'); if(Array.isArray(saved))localQueue=saved; }catch(e){}
+const byId=id=>document.getElementById(id);
+const value=id=>byId(id).value.trim();
+const escapeHtml=x=>String(x==null?'':x).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const categories=['Formation professionnelle','Tapisserie','Décoration'];
+const types=['Article','Étude','Vidéo','Podcast','Conférence','Visite','Autre'];
+function safeUrl(s){try{const u=new URL(String(s||''));return (u.protocol==='https:'||u.protocol==='http:')?u.href:''}catch(e){return ''}}
+function view(id){
+ document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('on',x.id===id));
+ document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',String(x.id==='tab-'+id)));
+ if(id==='review')renderReview();
+}
+function canonical(x){
+ return {title:String(x.title||'').slice(0,180).trim(),url:safeUrl(x.url||x.source),category:categories.includes(x.category)?x.category:'Tapisserie',type:types.includes(x.type)?x.type:'Autre',interest:String(x.interest||'').slice(0,750).trim(),audience:String(x.audience||'Tous publics').slice(0,60),author:String(x.author||'').slice(0,100),role:String(x.role||'').slice(0,50),added_at:String(x.added_at||new Date().toISOString().slice(0,10)),status:String(x.status||'pending')};
+}
+function card(x,admin,index){
+ const cat=escapeHtml(x.category),type=escapeHtml(x.type),who=escapeHtml(x.audience||'Tous publics');
+ const link=safeUrl(x.url);
+ const action=admin?'<div class="actions"><button class="primary" data-decision="approved" data-index="'+index+'">Retenir</button><button class="secondary" data-decision="rejected" data-index="'+index+'">Écarter</button><button class="secondary" data-decision="pending" data-index="'+index+'">Remettre en attente</button></div>':'';
+ return '<article class="entry"><div class="meta"><span class="chip">'+cat+'</span><span class="chip">'+type+'</span><span class="chip">'+who+'</span>'+(admin?'<span class="chip">'+escapeHtml(x.status)+'</span>':'')+'</div><h3>'+escapeHtml(x.title)+'</h3><p>'+escapeHtml(x.interest)+'</p>'+(admin?'<div class="small">Proposé par '+escapeHtml(x.author||'non renseigné')+' · '+escapeHtml(x.role||'')+'</div>':'')+'<a href="'+escapeHtml(link)+'" target="_blank" rel="noopener noreferrer">Consulter la source ↗</a>'+action+'</article>';
+}
+function renderLibrary(){
+ const q=value('search').toLocaleLowerCase('fr'),cat=value('categoryFilter'),type=value('typeFilter');
+ const items=publications.filter(x=>(!cat||x.category===cat)&&(!type||x.type===type)&&(!q||[x.title,x.interest,x.category,x.type].join(' ').toLocaleLowerCase('fr').includes(q)));
+ byId('libraryCount').textContent=items.length+' ressource(s) validée(s)';
+ byId('libraryCards').innerHTML=items.length?items.map(x=>card(x,false)).join(''):'<div class="empty">Aucune ressource validée ne correspond à cette sélection. La bibliothèque se remplira au fil des publications du RNF.</div>';
+}
+async function loadLibrary(){
+ try{
+  const response=await fetch(PUBLIC_FILE,{cache:'no-store'});
+  if(!response.ok)throw new Error('Bibliothèque inaccessible');
+  const data=await response.json();
+  if(!Array.isArray(data.items))throw new Error('Format de bibliothèque non reconnu');
+  publications=data.items.map(canonical).filter(x=>x.title&&x.url);
+  renderLibrary();
+ }catch(e){
+  byId('libraryCount').textContent='Chargement indisponible';
+  byId('libraryCards').innerHTML='<div class="empty">La bibliothèque ne peut pas être chargée pour le moment. Réessaie avec une connexion internet.</div>';
+ }
+}
+function proposalFromForm(){
+ if(!byId('proposalForm').reportValidity())return null;
+ const x=canonical({title:value('title'),url:value('source'),category:value('category'),type:value('type'),interest:value('interest'),audience:value('audience'),author:value('author'),role:value('role')});
+ if(!x.url){byId('proposalStatus').textContent='Le lien doit commencer par http:// ou https://.';return null}
+ return x;
+}
+function formatProposal(x){return JSON.stringify(x)}
+function prepareEmail(e){
+ e.preventDefault();
+ const x=proposalFromForm();if(!x)return;
+ const subject='[Observatoire RNF] Proposition · '+x.category+' · '+x.title;
+ const body='Pays,\n\nJe propose cette ressource pour l’Observatoire métier.\n\nTitre : '+x.title+'\nLien : '+x.url+'\nDomaine : '+x.category+'\nFormat : '+x.type+'\nPublic : '+x.audience+'\nIntérêt : '+x.interest+'\n\nProposé par : '+x.author+' ('+x.role+')\n\n--- FICHE JSON ---\n'+formatProposal(x)+'\n--- FIN ---';
+ byId('proposalStatus').textContent='Courriel préparé. Vérifie que la messagerie s’ouvre et confirme toi-même l’envoi.';
+ window.location.href='mailto:'+MAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+}
+function download(name,obj){
+ const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json;charset=utf-8'});
+ const link=document.createElement('a'),tmp=URL.createObjectURL(blob);
+ link.href=tmp;link.download=name;document.body.appendChild(link);link.click();link.remove();
+ setTimeout(()=>URL.revokeObjectURL(tmp),2000);
+}
+function downloadProposal(){const x=proposalFromForm();if(x){download('proposition-observatoire.json',x);byId('proposalStatus').textContent='Copie enregistrée sur cet appareil. Aucun envoi n’a été effectué.'}}
+function saveQueue(){localStorage.setItem(LOCAL_QUEUE_KEY,JSON.stringify(localQueue));renderReview()}
+function importProposal(){
+ let raw=value('importText'),data;
+ try{
+  if(raw.includes('--- FICHE JSON ---'))raw=raw.split('--- FICHE JSON ---')[1].split('--- FIN ---')[0].trim();
+  data=JSON.parse(raw);
+  const x=canonical(data);
+  if(!x.title||!x.url||!x.interest)throw new Error('Champs titre, lien et intérêt requis');
+  if(localQueue.some(y=>y.url===x.url&&y.title===x.title))throw new Error('Proposition déjà importée');
+  x.status='pending';localQueue.unshift(x);saveQueue();byId('importText').value='';
+  byId('reviewStatus').textContent='Proposition importée pour examen local.';
+ }catch(e){byId('reviewStatus').textContent='Import impossible : '+e.message}
+}
+function renderReview(){
+ const box=byId('reviewList');
+ box.innerHTML=localQueue.length?localQueue.map((x,i)=>card(x,true,i)).join(''):'<div class="empty">Aucune proposition importée sur cet appareil.</div>';
+}
+byId('reviewList').addEventListener('click',e=>{
+ const b=e.target.closest('[data-decision]');if(!b)return;
+ const i=Number(b.dataset.index),decision=b.dataset.decision;
+ if(!Number.isInteger(i)||!localQueue[i]||!['approved','rejected','pending'].includes(decision))return;
+ localQueue[i].status=decision;saveQueue();
+ byId('reviewStatus').textContent=decision==='approved'?'Ressource retenue localement, non encore publiée.':decision==='rejected'?'Proposition écartée localement.':'Proposition remise en attente.';
+});
+function exportValidated(){
+ const approved=localQueue.filter(x=>x.status==='approved');
+ const combined=[...publications,...approved].map(x=>({title:x.title,url:x.url,category:x.category,type:x.type,interest:x.interest,audience:x.audience,added_at:x.added_at}));
+ const seen=new Set(),items=combined.filter(x=>{const k=x.url.toLowerCase();if(seen.has(k))return false;seen.add(k);return true});
+ download('observatoire-publications.json',{schema:1,updated_at:new Date().toISOString().slice(0,10),items});
+ byId('reviewStatus').textContent='Export prêt : '+items.length+' ressource(s). Le fichier doit encore être intégré à la version publiée du Cockpit.';
+}
+loadLibrary();renderReview();
+</script>
+</body>
+</html>
