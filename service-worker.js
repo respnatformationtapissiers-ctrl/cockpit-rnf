@@ -1,5 +1,5 @@
-const CACHE='rnf-v017';
-const ASSETS=['./','./index.html','./manifest.webmanifest','./icon.svg','./observatoire.html','./observatoire-publications.json'];
+const CACHE='rnf-v016';
+const ASSETS=['./','./index.html','./manifest.webmanifest','./icon.svg'];
 
 const STOCK_URL='https://docs.google.com/spreadsheets/d/1xk117VgTqn1DrLXwZocTwLzudUaIwsGLVlK439uywxg/edit#gid=2034337610';
 
@@ -10,8 +10,8 @@ function enhanceCockpit(html){
   const stockTile='<button onclick="open(\''+STOCK_URL+'\')"><span>📦</span><b>Stock CFA</b><div class="muted small">Carcasses · QR · photos</div></button>';
 
   html=html.replace(athenaTile,stockTile+athenaTile);
-  html=html.replace('v0.15 web','v0.17 web');
-  html=html.replace('v0.15 web : suivi de budget BTM en lecture de synthèse.','v0.17 web : suivi de budget BTM + accès Stock CFA.');
+  html=html.replace('v0.15 web','v0.16 web');
+  html=html.replace('v0.15 web : suivi de budget BTM en lecture de synthèse.','v0.16 web : suivi de budget BTM + accès Stock CFA.');
   return html;
 }
 
