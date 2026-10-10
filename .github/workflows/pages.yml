@@ -40,12 +40,15 @@ jobs:
                   raise SystemExit('Tuile Athéna introuvable : injection Stock CFA impossible')
               html = html.replace(athena, stock + athena, 1)
 
-          html = html.replace('v0.15 web', 'v0.16 web')
-          html = html.replace('v0.15 web : suivi de budget BTM en lecture de synthèse.', 'v0.16 web : suivi de budget BTM + accès Stock CFA.')
+          html = html.replace('v0.15 web', 'v0.17 web')
+          html = html.replace('v0.15 web : suivi de budget BTM en lecture de synthèse.', 'v0.17 web : suivi de budget BTM, Stock CFA et Observatoire métier.')
           p.write_text(html, encoding='utf-8')
 
-          if '<b>Stock CFA</b>' not in p.read_text(encoding='utf-8'):
+          deployed = p.read_text(encoding='utf-8')
+          if '<b>Stock CFA</b>' not in deployed:
               raise SystemExit('Échec de vérification : tuile Stock CFA absente du fichier déployé')
+          if '<b>Observatoire métier</b>' not in deployed:
+              raise SystemExit('Échec de vérification : tuile Observatoire métier absente du fichier déployé')
           PY
 
       - name: Setup Pages
